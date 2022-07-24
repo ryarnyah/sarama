@@ -1084,7 +1084,7 @@ func TestInitProducerIDConnectionRefused(t *testing.T) {
 
 	seedBroker.Close()
 
-	_, err = client.InitProducerID()
+	_, err = client.InitProducerID(config)
 
 	if !errors.Is(err, ErrOutOfBrokers) {
 		t.Fatalf("unexpected error: %v", err)

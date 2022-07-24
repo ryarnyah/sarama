@@ -128,6 +128,16 @@ func (sp *SyncProducer) partitioner(topic string) sarama.Partitioner {
 	return partitioner
 }
 
+// CommitTxn commit current transaction.
+func (sp *SyncProducer) CommitTxn() error {
+	return nil
+}
+
+// AbortTxn abort current transaction.
+func (sp *SyncProducer) AbortTxn() error {
+	return nil
+}
+
 // Close corresponds with the Close method of sarama's SyncProducer implementation.
 // By closing a mock syncproducer, you also tell it that no more SendMessage calls will follow,
 // so it will write an error to the test state if there's any remaining expectations.

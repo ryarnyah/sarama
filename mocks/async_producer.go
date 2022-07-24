@@ -125,6 +125,25 @@ func (mp *AsyncProducer) Close() error {
 	return nil
 }
 
+func (mp *AsyncProducer) Flush() {
+	// Nothing to do.
+}
+
+// IsTransactional return true when current producer is is transactional.
+func (mp *AsyncProducer) IsTransactional() bool {
+	return false
+}
+
+// CommitTxn commit current transaction.
+func (mp *AsyncProducer) CommitTxn() error {
+	return nil
+}
+
+// AbortTxn abort current transaction.
+func (mp *AsyncProducer) AbortTxn() error {
+	return nil
+}
+
 // Input corresponds with the Input method of sarama's Producer implementation.
 // You have to set expectations on the mock producer before writing messages to the Input
 // channel, so it knows how to handle them. If there is no more remaining expectations and

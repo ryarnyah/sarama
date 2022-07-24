@@ -188,6 +188,11 @@ type Config struct {
 		// If enabled, the producer will ensure that exactly one copy of each message is
 		// written.
 		Idempotent bool
+		// Used in transactions to identify an instance of a producer through restarts
+		TransactionalID *string
+		// Amount of time a transaction can remain unresolved (neither committed nor aborted)
+		// default is 1 min
+		TransactionTimeout time.Duration
 
 		// Return specifies what channels will be populated. If they are set to true,
 		// you must read from the respective channels to prevent deadlock. If,

@@ -29,6 +29,9 @@ type SyncProducer interface {
 	// object passes out of scope, as it may otherwise leak memory.
 	// You must call this before calling Close on the underlying client.
 	Close() error
+
+	CommitTxn() error
+	AbortTxn() error
 }
 
 type syncProducer struct {
@@ -86,6 +89,14 @@ func verifyProducerConfig(config *Config) error {
 		return ConfigurationError("Producer.Return.Successes must be true to be used in a SyncProducer")
 	}
 	return nil
+}
+
+func (sp *syncProducer) CommitTxn() error {
+	return sp.producer.CommitTxn()
+}
+
+func (sp *syncProducer) AbortTxn() error {
+	return sp.producer.AbortTxn()
 }
 
 func (sp *syncProducer) SendMessage(msg *ProducerMessage) (partition int32, offset int64, err error) {
